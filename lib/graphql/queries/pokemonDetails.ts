@@ -1,5 +1,5 @@
-export const GET_POKEMON_DETAILS = `
-query getPokemonDetails($id: Int!) {
+export const GET_POKEMON_DESCRIPTION = `
+query getPokemonDescription($id: Int!) {
     pokemon_v2_pokemon(where: {id: {_eq: $id}}) {
         id
         name
@@ -10,10 +10,19 @@ query getPokemonDetails($id: Int!) {
             pokemon_v2_pokemonspeciesflavortexts(where: {language_id: {_eq: 9}}, limit: 1) {
                 flavor_text
             }
+            pokemon_v2_pokemonspeciesnames(where: {language_id: {_eq: 9}}) {
+                genus
+            }
         }
         pokemon_v2_pokemontypes {
             pokemon_v2_type {
                 name
+                pokemon_v2_typeefficacies(where: {damage_factor: {_in: [50, 0]}}) {
+                    damage_factor
+                    pokemonV2TypeByTargetTypeId {
+                        name
+                    }
+                }
             }
         }
         pokemon_v2_pokemonabilities {

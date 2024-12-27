@@ -6,7 +6,7 @@ export interface PokemonResponse {
 export interface Pokemon {
     id: number;
     name: string;
-    pokemon_v2_pokemontypes: PokemonV2Pokemontype[];
+    pokemon_v2_pokemontypes: BasicPokemonV2Pokemontype[];
     pokemon_v2_pokemonsprites: PokemonV2Pokemonsprite[];
 }
 
@@ -22,8 +22,8 @@ export interface PokemonDescriptionResponse {
 }
 
 export interface PokemonDescription {
-    name: string;
     id: number;
+    name: string;
     height: number;
     weight: number;
     pokemon_v2_pokemonspecy: PokemonV2Pokemonspecy;
@@ -31,6 +31,21 @@ export interface PokemonDescription {
     pokemon_v2_pokemonabilities: PokemonV2Pokemonability[];
     pokemon_v2_pokemonstats: PokemonV2Pokemonstat[];
     pokemon_v2_pokemonsprites: PokemonV2Pokemonsprite[];
+}
+
+export interface ReducedPokemonDescription {
+    name: string;
+    id: number;
+    height: number;
+    weight: number;
+    category: string;
+    genders: string[];
+    description: string;
+    types: string[];
+    abilities_and_effects: { [key: string]: string };
+    stats: { [key: string]: number };
+    weaknesses: string[];
+    sprite: string;
 }
 
 export interface PokemonV2Pokemonability {
@@ -49,10 +64,15 @@ export interface PokemonV2Abilityeffecttext {
 export interface PokemonV2Pokemonspecy {
     gender_rate: number;
     pokemon_v2_pokemonspeciesflavortexts: PokemonV2Pokemonspeciesflavortext[];
+    pokemon_v2_pokemonspeciesnames: PokemonV2Pokemonspeciesname[];
 }
 
 export interface PokemonV2Pokemonspeciesflavortext {
     flavor_text: string;
+}
+
+export interface PokemonV2Pokemonspeciesname {
+    genus: string;
 }
 
 export interface PokemonV2Pokemonsprite {
@@ -181,6 +201,19 @@ export interface PokemonV2 {
     name: string;
 }
 
-export interface PokemonV2Pokemontype {
+export interface BasicPokemonV2Pokemontype {
     pokemon_v2_type: PokemonV2;
+}
+
+export interface PokemonV2Pokemontype {
+    pokemon_v2_type: PokemonV2Type;
+}
+
+export interface PokemonV2Type {
+    name: string;
+    pokemon_v2_typeefficacies: PokemonV2Typeefficacy[];
+}
+export interface PokemonV2Typeefficacy {
+    damage_factor: number;
+    pokemonV2TypeByTargetTypeId: PokemonV2;
 }
