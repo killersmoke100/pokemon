@@ -1,7 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
-import { fetchPokemon } from "@/lib/api_interface"; 
+import { fetchPokemon } from "@/lib/api/apiInterface"; 
 import { ReducedPokemon } from "@/types/types";
+import Link from "next/link";
+import { reducePokemonData } from '@/lib/api/apiReducers';
 
 export default function PokemonList() {
   const [pokemonDetails, setPokemonDetails] = useState<ReducedPokemon[]>([]);
@@ -13,8 +15,8 @@ export default function PokemonList() {
     const loadPokemon = async () => {
       try {
         setLoading(true);
-        const pokemons = await fetchPokemon(12, currentPage);
-        setPokemonDetails(pokemons); 
+        const cleanPokemonData = reducePokemonData(await fetchPokemon(12, currentPage));
+        setPokemonDetails(cleanPokemonData); 
       } catch (err) {
         if (err instanceof Error) {
           setError(err.message);
@@ -37,7 +39,7 @@ export default function PokemonList() {
     setCurrentPage(prevPage => Math.max(prevPage - 1, 1)); // Ensure page can't go lower than 1
   };
 
-  if (loading) return <p>Loading Pokémon...</p>;
+  if (loading) return <p>Loading Pokémons...</p>;
   if (error) return <p>Error: {error}</p>;
 
   return (
@@ -47,26 +49,27 @@ export default function PokemonList() {
         <ul>
           {pokemonDetails.map((poke, index) => (
             <li key={index}>
-              {poke.id} - {poke.name} - {poke.types}
+              {poke.id} - {poke.name} - {poke.types} 
+              <Link href={`/pokemon/${poke.id}`}>
               <img
-              src={poke.sprite}
-              width={50} 
-              height={50}/>
+                src={poke.sprite}
+                width={50} 
+                height={50}
+                alt={`${poke.name} sprite`}/>
+              </Link>
             </li>
           ))}
         </ul>
       </div>
 
-      <div className="pagination">
+      <div>
         <button 
-          className="button-outline" 
           onClick={handlePreviousPage} 
           disabled={currentPage === 1}> 
           Previous
         </button>
         <span>Page {currentPage}</span>
         <button 
-          className="button-outline" 
           onClick={handleNextPage}>
           Next
         </button>
