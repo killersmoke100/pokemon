@@ -1,30 +1,14 @@
 export function HeroSection() {
   return (
-    <section className="bg-white text-black py-6 px-6 w-full h-48">
+    <header className="bg-white pt-4 pb-8 px-auto w-full h-24 border-b border-gray-300 flex items-center justify-center">
       <div>
-        <h1
-          className="mt-0 mb-0 mx-auto"
-          style={{
-            fontFamily: "Inter, sans-serif",
-            fontWeight: 600,
-            fontSize: "60px",
-            textAlign: "center",
-            marginBottom: "-16px",
-          }}
+        <h1 className="text-3xl text-black font-semibold text-center" 
         > Pokémon Browser
         </h1>
-        <h2
-          className="mt-0 mb-0 mx-auto"
-          style={{
-            fontFamily: "Inter, sans-serif",
-            fontWeight: 600,
-            fontSize: "30px",
-            textAlign: "center",
-            color: "#71717A",
-          }}
+        <h2 className="text-l text-subHeading font-semibold text-center"
         > Search and find Pokémon
         </h2>
       </div>
-    </section>
+    </header>
   );
 }

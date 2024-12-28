@@ -4,13 +4,13 @@ import { interpretGenderRate } from '@/lib/api/apiUtils';
 export function reducePokemonDescription(pokemonDescription: PokemonDescription): ReducedPokemonDescription {
   return {
     id: pokemonDescription.id ?? -1,
-    name: pokemonDescription.name ?? "Name Unavaliable",
+    name: capitaliseFirstLetter(pokemonDescription.name) ?? "Name Unavaliable",
     height: pokemonDescription.height ?? -1,
     weight: pokemonDescription.weight ?? -1,
     category: pokemonDescription.pokemon_v2_pokemonspecy.pokemon_v2_pokemonspeciesnames[0].genus ?? "Category Unavaliable",
     genders: interpretGenderRate(pokemonDescription.pokemon_v2_pokemonspecy.gender_rate) ?? ["Genders Unavaliable"],
     description: (pokemonDescription.pokemon_v2_pokemonspecy.pokemon_v2_pokemonspeciesflavortexts[0].flavor_text).replace('\f', '') ?? "Description Unavaliable",
-    types: pokemonDescription.pokemon_v2_pokemontypes.map((pokemon_v2_type) => pokemon_v2_type.pokemon_v2_type.name) ?? ["Types Unavaliable"],
+    types: pokemonDescription.pokemon_v2_pokemontypes.map((pokemon_v2_type) => capitaliseFirstLetter(pokemon_v2_type.pokemon_v2_type.name)) ?? ["Types Unavaliable"],
     abilities_and_effects: reduceAbilitiesToAbilityAndEffects(pokemonDescription.pokemon_v2_pokemonabilities) ?? new Map<string, string>([["Abilities Unavaliable", "Effects Unavaliable"]]),
     stats: reduceStatsToNameAndBase(pokemonDescription.pokemon_v2_pokemonstats) ?? new Map<string, number>([["No Stat Avaliable", -1]]),
     weaknesses: reduceTypeEfficaciesToWeaknesses(pokemonDescription.pokemon_v2_pokemontypes) ?? ["Weaknesses Unavaliable"],
@@ -39,9 +39,12 @@ function reduceStatsToNameAndBase(stats: PokemonV2Pokemonstat[]): {[key: string]
 export function reducePokemonData(pokemonData: Pokemon[]): ReducedPokemon[] {
   return pokemonData.map((pokemon) => ({
     id: pokemon.id ?? -1,
-    name: pokemon.name ?? "Name Unavaliable",
-    types: pokemon.pokemon_v2_pokemontypes.map(type => type.pokemon_v2_type.name) ?? ["Types Unavaliable"],
+    name: capitaliseFirstLetter(pokemon.name) ?? "Name Unavaliable",
+    types: pokemon.pokemon_v2_pokemontypes.map(type => capitaliseFirstLetter(type.pokemon_v2_type.name)) ?? ["Types Unavaliable"],
     sprite: pokemon.pokemon_v2_pokemonsprites[0].sprites.front_default ?? "",
   }));
 }
 
+function capitaliseFirstLetter(word: string): string {
+  return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+}

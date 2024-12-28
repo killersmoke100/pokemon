@@ -18,9 +18,9 @@ export function PaginationComponent({
   handlePreviousPage,
 }: PaginationComponentProps) {
   return (
-    <Pagination>
+    <Pagination className="flex items-center justify-center mt-8 mb-8">
       <PaginationContent>
-        <PaginationItem>
+        <PaginationItem className="bg-black text-white rounded-md mr-4">
           <PaginationPrevious
             onClick={handlePreviousPage}
             aria-disabled={currentPage <= 1}
@@ -28,9 +28,8 @@ export function PaginationComponent({
             className={currentPage <= 1 ? "pointer-events-none opacity-50" : undefined}
           />
         </PaginationItem>
-
-        <PaginationItem>
-          <PaginationNext onClick={handleNextPage} />
+        <PaginationItem className="bg-black text-white rounded-md">
+          <PaginationNext onClick={handleNextPage}/>
         </PaginationItem>
       </PaginationContent>
     </Pagination>

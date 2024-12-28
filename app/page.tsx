@@ -22,29 +22,29 @@ export default function PokemonList() {
   if (error) return <p>Error: {error}</p>;
   
   return (
-    <div>
+    <div >
       <HeroSection/>
-      <div className="border-t border-gray-300 w-full"></div>
-      
-      <h2
-        className="mt-0 mb-0 mx-auto"
-        style={{
-          fontFamily: "Inter, sans-serif",
-          fontWeight: 600,
-          fontSize: "30px",
-          textAlign: "left",
-        }}
-      >Explore Pokémon</h2>
+      <div>
+        <h2
+          className="flex items-center justify-left mt-8 mb-8 mx-auto font-semibold sm:px-8 md:px-16 lg:px-24"
+        >Explore Pokémon</h2>
+      </div>
 
-      <GridComponent
-        pokemonDetails={pokemonDetails}
-      />
-      
-      <PaginationComponent
-        currentPage={currentPage}
-        handleNextPage={handleNextPage}
-        handlePreviousPage={handlePreviousPage}
-      />
+      <main>
+        <GridComponent
+          pokemonDetails={pokemonDetails}
+        />
+        
+        <PaginationComponent
+          currentPage={currentPage}
+          handleNextPage={handleNextPage}
+          handlePreviousPage={handlePreviousPage}
+        />
+      </main>
+
+      <footer className="flex items-center justify-center bg-white text-center py-8 border-t border-gray-300">
+        <p className="text-xs font-bold">Thank you for using the Pokémon Browser!</p>
+      </footer>
     </div>
   );
 }

@@ -13,6 +13,8 @@ export default {
 			sans: ['Inter', 'sans-serif'],
 		  },
   		colors: {
+			cardBackground: '#F4F4F5',
+			subHeading: '#71717A',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
