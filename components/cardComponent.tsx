@@ -1,8 +1,6 @@
 import {
   Card,
-  CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -16,23 +14,33 @@ interface CardComponentProps {
 export function CardComponent({ pokemonDetail }: CardComponentProps) {
   return (
     <Link href={`/pokemon/${pokemonDetail.id}`}>
-      <Card>
-        <CardHeader>
-          <CardTitle>{pokemonDetail.name}</CardTitle>
-          <CardDescription>{pokemonDetail.id}</CardDescription>
-        </CardHeader>
-        <CardContent>
+      <Card className="flex flex-col overflow-hidden shadow-md">
+
+        <div className="bg-cardBackground flex items-center justify-center h-28">
           <img
             src={pokemonDetail.sprite}
-            width={50} 
-            height={50}
             alt={`${pokemonDetail.name} sprite`}
+            className="w-28 h-28 object-contain"
           />
-        </CardContent>
-        <CardFooter>
-          {pokemonDetail.types}
-        </CardFooter>
+        </div>
+
+        <div className="h-36">
+          <CardHeader className="text-left">
+            <CardTitle className="text-black text-lg font-semibold" >{pokemonDetail.name}</CardTitle>
+              <CardDescription className="text-subHeading font-semibold" >
+                {`#${String(pokemonDetail.id).padStart(4, '0')}`}
+              </CardDescription>
+          </CardHeader>
+
+          <div className="flex justify-left gap-2 ml-6 mb-6">
+            {pokemonDetail.types.map((type) => (
+              <span key={type} className="bg-black text-white text-xs py-0.5 px-3 rounded-md">
+                {type}
+              </span>
+            ))}
+          </div>
+        </div>
       </Card>
     </Link>
-  )
+  );
 }
