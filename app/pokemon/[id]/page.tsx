@@ -9,36 +9,39 @@ import { DescriptionComponent} from "@/components/pokeDescComponents/description
 import { SpriteComponent} from "@/components/pokeDescComponents/spriteComponent";
 import { ReturnButton} from "@/components/generalComponents/returnHomeButtonComponent";
 import { Footer } from "@/components/generalComponents/footerComponent";
+import { LoadingSpinnerComponent } from "@/components/generalComponents/loadingSpinnerComponent";
+import { BrowserSubheadingComponent } from "@/components/pokeDescComponents/browserSubheadingComponent";
 
 export default function PokemonDescription() {
   const { id } = useParams<{ id: string }>();
   const { pokemonDescription, loading, error } = loadPokemonDesc(id);
   
 
-  if (loading) return <p>Loading Pokémon...</p>;
+  if (loading) return (
+    <div className="flex flex-col min-h-screen">
+      <BrowserSubheadingComponent/>
+      <div className="flex-grow flex flex-col items-center justify-center">
+        <LoadingSpinnerComponent/>
+      </div>
+      <Footer/>
+    </div>
+  );
+  
   if (error) return <p>Error: {error}</p>;
   if (!pokemonDescription) return <p>Error: No Description Found</p>;
   
   return (
     <div>
-      <div>
-        <h2 className="flex items-center justify-left mt-4 mb-4 mx-auto font-semibold sm:mx-8 md:mx-16 lg:mx-24"
-          >Pokémon Browser
-        </h2>
-      </div>
+      <BrowserSubheadingComponent/>
 
-      <div>
-        <div className="relative w-full">
-          <div className="absolute w-full h-1/2 bg-gray-300"></div>
-          <div className="absolute w-full bg-white"></div>
-            <SpriteComponent id={pokemonDescription.id} name={pokemonDescription.name} sprite={pokemonDescription.sprite}/>
-        </div>
+      <div className="relative w-full">
+        <div className="absolute w-full h-1/2 bg-gray-300"></div>
+        <div className="absolute w-full bg-white"></div>
+          <SpriteComponent id={pokemonDescription.id} name={pokemonDescription.name} sprite={pokemonDescription.sprite}/>
       </div>
-
-      <div>
-        <DescriptionComponent desc={pokemonDescription.description}/>
-      </div>
-
+  
+      <DescriptionComponent desc={pokemonDescription.description}/>
+    
       <div className="grid grid-cols-3 grid-rows-2 gap-4 sm:mx-8 md:mx-16 lg:mx-24">
         <div className="col-span-1 row-span-2">
           <GeneralDetailsComponent
@@ -64,11 +67,7 @@ export default function PokemonDescription() {
           <StatsComponent stats={pokemonDescription.stats} />
         </div>
       </div>
-  
-      <div>
-        <ReturnButton/>
-      </div>
-      
+      <ReturnButton/>
       <Footer/>
     </div>
   );
