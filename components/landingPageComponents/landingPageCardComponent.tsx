@@ -27,7 +27,7 @@ export function CardComponent({ pokemonDetail }: CardComponentProps) {
         <div className="h-36">
           <CardHeader className="text-left">
             <CardTitle className="text-black text-lg font-semibold" >{pokemonDetail.name}</CardTitle>
-              <CardDescription className="text-subHeading font-semibold" >
+              <CardDescription className="text-subHeadingGrey font-semibold" >
                 {`#${String(pokemonDetail.id).padStart(4, '0')}`}
               </CardDescription>
           </CardHeader>

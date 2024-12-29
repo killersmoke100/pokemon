@@ -113,5 +113,5 @@ export {
   PaginationItem,
   PaginationPrevious,
   PaginationNext,
-  PaginationEllipsis,
+  PaginationEllipsis, ChevronLeft,
 }
