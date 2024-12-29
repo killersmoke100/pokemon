@@ -1,8 +1,9 @@
 "use client";
 import { useState } from "react";
-import { PaginationComponent } from "@/components/paginationComponent";
-import { GridComponent } from "@/components/gridComponent";
-import { HeroSection } from "@/components/heroComponent";
+import { PaginationComponent } from "@/components/landingPageComponents/paginationComponent";
+import { GridComponent } from "@/components/landingPageComponents/gridComponent";
+import { HeroSection } from "@/components/landingPageComponents/heroComponent";
+import { Footer } from "@/components/generalComponents/footerComponent";
 import { loadPokemonData } from "@/hooks/loadPokemonList";
 
 
@@ -26,7 +27,7 @@ export default function PokemonList() {
       <HeroSection/>
       <div>
         <h2
-          className="flex items-center justify-left mt-8 mb-8 mx-auto font-semibold sm:px-8 md:px-16 lg:px-24"
+          className="flex items-center justify-left mt-8 mb-8 mx-auto font-semibold sm:mx-8 md:mx-16 lg:mx-24"
         >Explore Pokémon</h2>
       </div>
 
@@ -42,9 +43,7 @@ export default function PokemonList() {
         />
       </main>
 
-      <footer className="flex items-center justify-center bg-white text-center py-8 border-t border-gray-300">
-        <p className="text-xs font-bold">Thank you for using the Pokémon Browser!</p>
-      </footer>
+      <Footer/>
     </div>
   );
 }

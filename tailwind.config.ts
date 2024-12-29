@@ -14,7 +14,8 @@ export default {
 		  },
   		colors: {
 			cardBackground: '#F4F4F5',
-			subHeading: '#71717A',
+			subHeadingGrey: '#71717A',
+			borderGrey: 'grey-300',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
