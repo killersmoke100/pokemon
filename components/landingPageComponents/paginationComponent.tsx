@@ -20,7 +20,9 @@ export function PaginationComponent({
   return (
     <Pagination className="flex items-center justify-center mt-8 mb-8">
       <PaginationContent>
-        <PaginationItem className="bg-black text-white rounded-md mr-4">
+        <PaginationItem 
+          className={`bg-black text-white rounded-md mr-2 ${
+          currentPage <= 1 ? "bg-gray-400 pointer-events-none opacity-50 " : undefined}`} >
           <PaginationPrevious
             onClick={handlePreviousPage}
             aria-disabled={currentPage <= 1}

@@ -5,7 +5,8 @@ import { GridComponent } from "@/components/landingPageComponents/gridComponent"
 import { HeroSection } from "@/components/landingPageComponents/heroComponent";
 import { Footer } from "@/components/generalComponents/footerComponent";
 import { loadPokemonData } from "@/hooks/loadPokemonList";
-
+import { LoadingSpinnerComponent } from "@/components/generalComponents/loadingSpinnerComponent";
+import { LoadingPaginationComponent } from "@/components/generalComponents/loadingPaginationComponent";
 
 export default function PokemonList() {
   const [currentPage, setCurrentPage] = useState(1); 
@@ -19,30 +20,41 @@ export default function PokemonList() {
     setCurrentPage(prevPage => Math.max(prevPage - 1, 1)); // Ensure page can't go lower than 1
   };
 
-  if (loading) return <p>Loading Pokémons...</p>;
-  if (error) return <p>Error: {error}</p>;
   
-  return (
-    <div >
-      <HeroSection/>
-      <div>
-        <h2
-          className="flex items-center justify-left mt-8 mb-8 mx-auto font-semibold sm:mx-8 md:mx-16 lg:mx-24"
-        >Explore Pokémon</h2>
+  if (loading) return (
+    <div>
+      <div className="flex flex-col min-h-screen">
+        <HeroSection/>
+        <h2 className="text-left my-8 font-semibold sm:mx-8 md:mx-16 lg:mx-24">
+          Explore Pokémon
+        </h2>
+        <div className="flex-grow flex flex-col items-center justify-center">
+          <LoadingSpinnerComponent/>
+        </div>
+        <LoadingPaginationComponent/>
+        <Footer/>
       </div>
+    </div>
+  );
 
-      <main>
-        <GridComponent
-          pokemonDetails={pokemonDetails}
-        />
+  if (error) return <p>Error: {error}</p>;
+
+  return (
+    <div className="flex flex-col min-h-screen">
+      <HeroSection/>
+      <h2 className="text-left my-8 font-semibold sm:mx-8 md:mx-16 lg:mx-24">
+        Explore Pokémon
+      </h2>
+
+      <GridComponent
+        pokemonDetails={pokemonDetails}
+      />
         
-        <PaginationComponent
-          currentPage={currentPage}
-          handleNextPage={handleNextPage}
-          handlePreviousPage={handlePreviousPage}
-        />
-      </main>
-
+      <PaginationComponent
+        currentPage={currentPage}
+        handleNextPage={handleNextPage}
+        handlePreviousPage={handlePreviousPage}
+      />
       <Footer/>
     </div>
   );
