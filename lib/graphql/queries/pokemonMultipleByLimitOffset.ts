@@ -1,4 +1,4 @@
-export const GET_POKEMON_BASIC_INFO = `
+export const GET_MULTIPLE_POKEMON_BY_LIMIT_OFFSET = `
 query getPokemonBasicInfo($limit: Int!, $offset: Int!) {
     pokemon_v2_pokemon(limit: $limit, offset: $offset) {
         id
