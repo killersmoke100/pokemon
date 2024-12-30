@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchPokemon } from "@/lib/api/apiInterface"; 
+import { fetchPokemon, fetchSinglePokemon } from "@/lib/api/apiInterface"; 
 import { ReducedPokemon } from "@/types/types";
 import { reducePokemonData } from "@/lib/api/apiReducers";
 
@@ -10,7 +10,7 @@ interface PokemonData {
   error: string | null;
 }
   
-export function loadPokemonData(currentPage: number): PokemonData {
+export function loadPokemonData(currentPage: number, name: string): PokemonData {
   const [pokemonDetails, setPokemonDetails] = useState<ReducedPokemon[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null); 
@@ -19,8 +19,9 @@ export function loadPokemonData(currentPage: number): PokemonData {
     const loadPokemon = async () => {
       try {
         setLoading(true);
-        const cleanPokemonData = reducePokemonData(await fetchPokemon(12, currentPage));
-        setPokemonDetails(cleanPokemonData); 
+        const fetchedData = name ? await fetchSinglePokemon(name) : await fetchPokemon(12, currentPage);
+        const cleanPokemonData = reducePokemonData(fetchedData); 
+        setPokemonDetails(cleanPokemonData);
       } catch (err) {
         if (err instanceof Error) {
           setError(err.message);
@@ -32,7 +33,7 @@ export function loadPokemonData(currentPage: number): PokemonData {
       }
     };
     loadPokemon();
-    }, [currentPage]);
+    }, [currentPage, name]);
 
     return { pokemonDetails, loading, error };
 }
