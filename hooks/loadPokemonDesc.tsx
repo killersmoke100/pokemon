@@ -34,5 +34,5 @@ export function loadPokemonDesc(id: string): PokemonDescData {
     loadPokemon();
     }, []);
 
-    return { pokemonDescription, loading, error };
+  return { pokemonDescription, loading, error };
 }

@@ -1,17 +1,16 @@
 import { useState, useEffect } from "react";
-import { fetchPokemon, fetchSinglePokemon } from "@/lib/api/apiInterface"; 
+import { fetchMultiplePokemon, fetchSinglePokemon } from "@/lib/api/apiInterface"; 
 import { ReducedPokemon } from "@/types/types";
 import { reducePokemonData } from "@/lib/api/apiReducers";
 
-
 interface PokemonData {
-  pokemonDetails: ReducedPokemon[];
+  pokemonData: ReducedPokemon[];
   loading: boolean;
   error: string | null;
 }
   
 export function loadPokemonData(currentPage: number, name: string): PokemonData {
-  const [pokemonDetails, setPokemonDetails] = useState<ReducedPokemon[]>([]);
+  const [pokemonData, setPokemonData] = useState<ReducedPokemon[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null); 
 
@@ -19,9 +18,9 @@ export function loadPokemonData(currentPage: number, name: string): PokemonData 
     const loadPokemon = async () => {
       try {
         setLoading(true);
-        const fetchedData = name ? await fetchSinglePokemon(name) : await fetchPokemon(12, currentPage);
+        const fetchedData = name ? await fetchSinglePokemon(name) : await fetchMultiplePokemon(12, currentPage);
         const cleanPokemonData = reducePokemonData(fetchedData); 
-        setPokemonDetails(cleanPokemonData);
+        setPokemonData(cleanPokemonData);
       } catch (err) {
         if (err instanceof Error) {
           setError(err.message);
@@ -35,5 +34,5 @@ export function loadPokemonData(currentPage: number, name: string): PokemonData 
     loadPokemon();
     }, [currentPage, name]);
 
-    return { pokemonDetails, loading, error };
+  return { pokemonData, loading, error };
 }

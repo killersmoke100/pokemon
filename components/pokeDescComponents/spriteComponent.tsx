@@ -4,7 +4,7 @@ interface SpriteComponentProps {
   sprite: string;
 }
 
-export function SpriteComponent({ id, name, sprite }: SpriteComponentProps) {
+export function SpriteImageIdAndText({ id, name, sprite }: SpriteComponentProps) {
   return (
     <div>
       <div className="relative flex items-center justify-center pt-16">

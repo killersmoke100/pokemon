@@ -9,7 +9,7 @@ interface AbilitiesAndEffectsComponentProps {
   abilitiesAndEffects: { [key: string]: string };
 }
   
-export function AbiltyComponent({ abilitiesAndEffects }: AbilitiesAndEffectsComponentProps) {
+export function AbiltyAndEffects({ abilitiesAndEffects }: AbilitiesAndEffectsComponentProps) {
   return (
     <Card className="flex flex-col overflow-hidden h-full">
       <div>

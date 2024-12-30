@@ -4,19 +4,18 @@ import { GET_POKEMON_DESCRIPTION } from '@/lib/graphql/queries/pokemonDetails';
 import { GET_POKEMON_BY_NAME } from '@/lib/graphql/queries/pokemonByName';
 import { PokemonResponse, Pokemon, PokemonDescriptionResponse, PokemonDescription} from '@/types/types';
 
-
-export async function fetchPokemon(limit: number, page_number: number): Promise<Pokemon[]> {
+export async function fetchMultiplePokemon(limit: number, page_number: number): Promise<Pokemon[]> {
   const offset = (page_number - 1) * limit;
   const variables = { limit, offset };
   
-  const response = await fetchPokemonData(variables);
+  const response = await fetchMultiplePokemonData(variables);
   if (response instanceof Error) { 
     throw response;
   }
   return response.pokemon_v2_pokemon;
 }
 
-async function fetchPokemonData(variables: { limit: number, offset: number }): Promise<PokemonResponse | Error>{
+async function fetchMultiplePokemonData(variables: { limit: number, offset: number }): Promise<PokemonResponse | Error>{
   try {
     return await graphqlClient.request<PokemonResponse>(GET_POKEMON_BASIC_INFO, variables);
   } catch (error) {

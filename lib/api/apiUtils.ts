@@ -11,10 +11,10 @@ export function interpretGenderRate(genderRate: number): string[] {
   else {
     return ["Male", "Female"];
   }
-};
+}
 
-export function stringIdToNumber(string_id: string): number {
-  return parseInt(string_id)
+export function stringIdToNumber(stringId: string): number {
+  return parseInt(stringId);
 }
 
 export function capitaliseFirstLetter(word: string): string {

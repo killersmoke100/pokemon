@@ -9,7 +9,7 @@ interface TypesAndWeaknessesComponentProps {
   weaknesses: string[];
 }
 
-export function TypesAndWeaknessesComponent({ types, weaknesses }: TypesAndWeaknessesComponentProps) {
+export function TypesAndWeaknesses({ types, weaknesses }: TypesAndWeaknessesComponentProps) {
   return (
     <Card className="flex flex-col overflow-hidden h-full">
       <div>
