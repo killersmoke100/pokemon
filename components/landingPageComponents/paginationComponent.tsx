@@ -12,7 +12,7 @@ interface PaginationComponentProps {
   handlePreviousPage: () => void;
 }
 
-export function PaginationComponent({
+export function CustomPagination({
   currentPage,
   handleNextPage,
   handlePreviousPage,

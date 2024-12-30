@@ -15,7 +15,7 @@ export function reducePokemonDescription(pokemonDescription: PokemonDescription)
     stats: reduceStatsToNameAndBase(pokemonDescription.pokemon_v2_pokemonstats) ?? new Map<string, number>([["No Stat Avaliable", -1]]),
     weaknesses: reduceTypeEfficaciesToWeaknesses(pokemonDescription.pokemon_v2_pokemontypes) ?? ["Weaknesses Unavaliable"],
     sprite: pokemonDescription.pokemon_v2_pokemonsprites[0].sprites.front_default ?? "",
-};
+  };
 }
 
 function reduceTypeEfficaciesToWeaknesses(pokemonTypes: PokemonV2Pokemontype[]): string[] {

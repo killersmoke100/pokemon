@@ -6,7 +6,7 @@ import {
     PaginationNext,
   } from "@/components/ui/pagination";
 
-export function LoadingPaginationComponent() {
+export function LoadingPagination() {
   return (
     <Pagination className="flex items-center justify-center mt-8 mb-8">
         <PaginationContent>

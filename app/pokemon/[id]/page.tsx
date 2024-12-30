@@ -2,28 +2,27 @@
 import { useParams } from 'next/navigation'; 
 import { loadPokemonDesc } from "@/hooks/loadPokemonDesc";
 import { StatsComponent } from "@/components/pokeDescComponents/fightingStatsProgressComponent";
-import { AbiltyComponent } from "@/components/pokeDescComponents/abilityCardComponent";
-import { GeneralDetailsComponent } from "@/components/pokeDescComponents/generalDetailsCardComponent";
-import { TypesAndWeaknessesComponent } from "@/components/pokeDescComponents/typeWeaknessesCardComponent";
-import { DescriptionComponent} from "@/components/pokeDescComponents/descriptionComponent";
-import { SpriteComponent} from "@/components/pokeDescComponents/spriteComponent";
+import { AbiltyAndEffects } from "@/components/pokeDescComponents/abilityCardComponent";
+import { GeneralDetails } from "@/components/pokeDescComponents/generalDetailsCardComponent";
+import { TypesAndWeaknesses } from "@/components/pokeDescComponents/typeWeaknessesCardComponent";
+import { Description} from "@/components/pokeDescComponents/descriptionComponent";
+import { SpriteImageIdAndText} from "@/components/pokeDescComponents/spriteComponent";
 import { ReturnButton} from "@/components/generalComponents/returnHomeButtonComponent";
 import { Footer } from "@/components/generalComponents/footerComponent";
-import { LoadingSpinnerComponent } from "@/components/generalComponents/loadingSpinnerComponent";
-import { BrowserSubheadingComponent } from "@/components/pokeDescComponents/browserSubheadingComponent";
+import { LoadingSpinner } from "@/components/generalComponents/loadingSpinnerComponent";
+import { BrowserSubheading } from "@/components/pokeDescComponents/browserSubheadingComponent";
 
 export default function PokemonDescription() {
   const { id } = useParams<{ id: string }>();
   const { pokemonDescription, loading, error } = loadPokemonDesc(id);
-  
 
   if (loading) return (
     <div className="flex flex-col min-h-screen">
-      <BrowserSubheadingComponent/>
+      <BrowserSubheading h2Text="Pokémon Browser"/>
       <div className="flex-grow flex flex-col items-center justify-center">
-        <LoadingSpinnerComponent/>
+        <LoadingSpinner/>
       </div>
-      <Footer/>
+      <Footer pText="Thank you for using the Pokémon Browser!"/>
     </div>
   );
   
@@ -32,19 +31,19 @@ export default function PokemonDescription() {
   
   return (
     <div>
-      <BrowserSubheadingComponent/>
+      <BrowserSubheading h2Text="Pokémon Browser"/>
 
       <div className="relative w-full">
         <div className="absolute w-full h-1/2 bg-gray-300"></div>
         <div className="absolute w-full bg-white"></div>
-          <SpriteComponent id={pokemonDescription.id} name={pokemonDescription.name} sprite={pokemonDescription.sprite}/>
+          <SpriteImageIdAndText id={pokemonDescription.id} name={pokemonDescription.name} sprite={pokemonDescription.sprite}/>
       </div>
   
-      <DescriptionComponent desc={pokemonDescription.description}/>
+      <Description desc={pokemonDescription.description}/>
     
       <div className="grid grid-cols-3 grid-rows-2 gap-4 sm:mx-8 md:mx-16 lg:mx-24">
         <div className="col-span-1 row-span-2">
-          <GeneralDetailsComponent
+          <GeneralDetails
             height={pokemonDescription.height}
             category={pokemonDescription.category}
             weight={pokemonDescription.weight}
@@ -53,22 +52,22 @@ export default function PokemonDescription() {
         </div>
 
         <div className="col-span-1 row-span-1">
-          <TypesAndWeaknessesComponent
+          <TypesAndWeaknesses
             types={pokemonDescription.types}
             weaknesses={pokemonDescription.weaknesses}
           />
         </div>
 
         <div className="col-span-1 row-span-1">
-          <AbiltyComponent abilitiesAndEffects={pokemonDescription.abilities_and_effects} />
+          <AbiltyAndEffects abilitiesAndEffects={pokemonDescription.abilities_and_effects} />
         </div>
 
         <div className="col-span-2 row-span-1">
           <StatsComponent stats={pokemonDescription.stats} />
         </div>
       </div>
-      <ReturnButton/>
-      <Footer/>
+      <ReturnButton buttonText="Return Home"/>
+      <Footer pText="Thank you for using the Pokémon Browser!"/>
     </div>
   );
 }

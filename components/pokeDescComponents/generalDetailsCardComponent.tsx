@@ -12,7 +12,7 @@ interface GeneralDetailsComponentProps {
   genders: string[]
 }
   
-export function GeneralDetailsComponent({ height, category, weight, genders }: GeneralDetailsComponentProps) {
+export function GeneralDetails({ height, category, weight, genders }: GeneralDetailsComponentProps) {
   return (
     <Card className="flex flex-col overflow-hidden h-full">
       <div>

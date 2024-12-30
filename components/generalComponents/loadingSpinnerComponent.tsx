@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-export function LoadingSpinnerComponent() {
+export function LoadingSpinner() {
   return (
     <div className="flex items-center justify-center">
       <svg
