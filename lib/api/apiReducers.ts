@@ -11,8 +11,8 @@ export function reducePokemonDescription(pokemonDescription: PokemonDescription)
     genders: interpretGenderRate(pokemonDescription.pokemon_v2_pokemonspecy.gender_rate) ?? ["Genders Unavaliable"],
     description: (pokemonDescription.pokemon_v2_pokemonspecy.pokemon_v2_pokemonspeciesflavortexts[0].flavor_text).replace('\f', ' ') ?? "Description Unavaliable",
     types: pokemonDescription.pokemon_v2_pokemontypes.map((pokemon_v2_type) => capitaliseFirstLetter(pokemon_v2_type.pokemon_v2_type.name)) ?? ["Types Unavaliable"],
-    abilities_and_effects: reduceAbilitiesToAbilityAndEffects(pokemonDescription.pokemon_v2_pokemonabilities) ?? new Map<string, string>([["Abilities Unavaliable", "Effects Unavaliable"]]),
-    stats: reduceStatsToNameAndBase(pokemonDescription.pokemon_v2_pokemonstats) ?? new Map<string, number>([["No Stat Avaliable", -1]]),
+    abilities_and_effects: reduceAbilitiesToAbilityAndEffects(pokemonDescription.pokemon_v2_pokemonabilities) ?? {"Abilities Unavailable": "Effects Unavailable"},
+    stats: reduceStatsToNameAndBase(pokemonDescription.pokemon_v2_pokemonstats) ?? {"No Stat Avaliable": -1},
     weaknesses: reduceTypeEfficaciesToWeaknesses(pokemonDescription.pokemon_v2_pokemontypes) ?? ["Weaknesses Unavaliable"],
     sprite: pokemonDescription.pokemon_v2_pokemonsprites[0].sprites.front_default ?? "",
   };
@@ -34,9 +34,9 @@ function reduceAbilitiesToAbilityAndEffects(abilities: PokemonV2Pokemonability[]
 function reduceStatsToNameAndBase(stats: PokemonV2Pokemonstat[]): {[key: string]: number} {
   return Object.fromEntries(stats.map((stat) => [
     stat.pokemon_v2_stat.name
-    .replace(/-/g, ' ')
-    .replace(/\bhp\b/i, 'HP')
-    .replace(/\b\w+/g, (word) => word.charAt(0).toUpperCase() + word.slice(1)),
+    .replace(/-/g, ' ') // Replace hyphen with space
+    .replace(/\bhp\b/i, 'HP') // Capitalise HP 
+    .replace(/\b\w+/g, (word) => word.charAt(0).toUpperCase() + word.slice(1)), // Make each letter of word capitalised 
     stat.base_stat])) 
 }
 
